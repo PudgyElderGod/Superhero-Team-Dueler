@@ -214,3 +214,16 @@ class Arena:
         name = input('Name ya weapon: ')
         attack_strength = input('Enter a (fair) power level for your weapon. #: ')
         return Weapon(name, int(attack_strength))
+
+    def create_armor(self):
+        name = input('Name your armor: ')
+        max_guard = input('Enter a (fair) power level for your armor. #: ')
+        return Armor(name, int(max_guard))
+
+    def create_hero(self):
+        name = input('Name your hero: ')
+        new_Hero = Hero(name, start_hp=100)
+        new_hero.add_ability(self.create_ability())
+        new_Hero.add_weapon(self.create_weapon())
+        new_Hero.add_armor(self.create_armor())
+        return new_Hero
