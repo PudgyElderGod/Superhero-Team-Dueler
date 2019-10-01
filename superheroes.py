@@ -122,3 +122,23 @@ class Hero:
         else:
             WLR = total_wins/total_losses
         return WLR
+
+#Class Team
+class Team:
+    '''List of champions'''
+
+    def __init__(self, name):
+        '''Properties ahoy'''
+        self.name = name
+        self.heroes = []
+
+    def add_help(self, hero):
+        '''Adds a boi'''
+        self.heroes.append(hero)
+
+    def remove_hero(self, hero):
+        '''Subtracts a boi'''
+        if hero in self.heroes:
+            self.heroes.remove(hero)
+        else:
+            return 0
