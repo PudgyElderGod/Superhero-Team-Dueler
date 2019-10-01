@@ -198,3 +198,19 @@ class Team:
 
 
 #Class Arena
+class Arena:
+
+    def __init__(self, username):
+        self.name = name
+        self.team_the_first = None
+        self.team_the_second = None
+
+    def create_ability(self):
+        name = input('Name your ability: ')
+        attack_strength = input('Enter a (fair) power level. #: ')
+        return Ability(name, int(attack_strength))
+
+    def create_weapon(slef):
+        name = input('Name ya weapon: ')
+        attack_strength = input('Enter a (fair) power level for your weapon. #: ')
+        return Weapon(name, int(attack_strength))
