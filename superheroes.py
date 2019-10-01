@@ -83,7 +83,7 @@ class Hero:
 
     def fight(self, foe):
         '''The battle between the forces of code and coder.'''
-        print('!!! The battle begins between ' + self.name + 'and ' + foe.name + ' !!!')
+        print('!!! The battle begins between ' + self.name + ' and ' + foe.name + ' !!!')
         combatant = random.randint(0, 1)
         while self.is_alive() and foe.is_alive():
             if combatant == 0:
@@ -136,7 +136,7 @@ class Team:
         self.name = name
         self.heroes = []
 
-    def add_help(self, hero):
+    def add_hero(self, hero):
         '''Adds a boi'''
         self.heroes.append(hero)
 
@@ -154,6 +154,7 @@ class Team:
 
     def list_conscious(self):
         '''Returns conscious heroes'''
+        conscious = []
         for hero in self.heroes:
             if hero.is_conscious():
                 conscious.append(hero)
@@ -163,7 +164,7 @@ class Team:
         '''Pits teams of heroes against each other'''
         print('!!! Prepare for a Heck in a Seck match between the {} team and the {} squad!!!'.format(self.name, opposing_team.name))
         while self.any_conscious and opposing_team.any_conscious():
-            random.choice(self.list_conscious()).fight(random.choice(other_team.list_conscious()))
+            random.choice(self.list_conscious()).fight(random.choice(opposing_team.list_conscious()))
         if self.any_conscious():
             print('!!! The {} team is victorious !!!'.format(self.name))
         else:
@@ -173,7 +174,7 @@ class Team:
         '''Shows if any heroes are left standing'''
         for hero in self.heroes:
             if hero.is_conscious():
-                return true
+                return True
         return False
 
     def awaken_sleepers(self):
@@ -200,8 +201,7 @@ class Team:
 #Class Arena
 class Arena:
 
-    def __init__(self, username):
-        self.name = name
+    def __init__(self):
         self.team_the_first = None
         self.team_the_second = None
 
@@ -222,23 +222,28 @@ class Arena:
 
     def create_hero(self):
         name = input('Name your hero: ')
-        new_Hero = Hero(name, start_hp=100)
+        new_hero = Hero(name, start_hp=100)
         new_hero.add_ability(self.create_ability())
-        new_Hero.add_weapon(self.create_weapon())
-        new_Hero.add_armor(self.create_armor())
-        return new_Hero
+        new_hero.add_weapon(self.create_weapon())
+        new_hero.add_armor(self.create_armor())
+        return new_hero
+
+    def create_team(self):
+        team_name = input('Name ya team: ').title()
+        team = Team(team_name)
+        heroes_count = input('Number of heroes on {}: '.format(team_name))
+        while not heroes_count.isnumeric() or int(heroes_count) < 1:
+            heroes_count = input('You have to have at least one hero. #:')
+        heroes_count = int(heroes_count)
+        for x in range(0, heroes_count):
+            team.add_hero(self.create_hero())
+        return team
 
     def build_team_the_first(self):
-        hero_amount = input('How many heroes do you want? #: ')
-        for i in range(0, int(hero_amount)):
-            self.team_the_first.add_hero(Self.create_hero())
-        pass
+        self.team_the_first = self.create_team()
 
     def build_team_the_second(self):
-        hero_amount = input('How many heroes do you want? #: ')
-        for i in range(0, int(her_amount)):
-            self.team_the_second.add_hero(self.create_hero())
-        pass
+        self.team_the_second = self.create_team()
 
     def team_battle(self):
         self.team_the_first.attack(self.team_the_second)
