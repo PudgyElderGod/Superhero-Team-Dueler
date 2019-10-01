@@ -67,8 +67,9 @@ class Hero:
         '''Calculates the total damage.'''
         damage = 0
         for ability in self.abilities:
-            attack = ability.attack()
-            damage += attack
+            damage += ability.attack()
+            print(f'{ability.name} hits for {damage} damage!')
+        return damage
 
     def defend(self):
         '''Blocks damage'''
@@ -85,7 +86,7 @@ class Hero:
         '''The battle between the forces of code and coder.'''
         print('!!! The battle begins between ' + self.name + ' and ' + foe.name + ' !!!')
         combatant = random.randint(0, 1)
-        while self.is_alive() and foe.is_alive():
+        while self.is_conscious() and foe.is_conscious():
             if combatant == 0:
                 damage = self.attack()
                 foe.take_damage(damage)
