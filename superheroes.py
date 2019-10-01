@@ -252,3 +252,24 @@ class Arena:
             print(f'{self.team_the_first.name} is the winner!')
         else:
             print("It's a draw!")
+
+
+if __name__ == "__main__":
+    game_is_running = True
+
+    arena = Arena()
+
+    arena.build_team_the_first()
+    arena.build_team_the_second()
+
+    while game_is_running:
+        arena.team_battle()
+        arena.show_results()
+        play_again = input("Restart? Y/N:")
+
+        if play_again.lower() =="n":
+            game_is_running = False
+        else:
+            print('-_-_-_-_-_-_-Restarting-_-_-_-_-_-_-_-')
+            arena.team_the_first.awaken_sleepers()
+            arena.team_the_second.awaken_sleepers()
