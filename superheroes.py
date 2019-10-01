@@ -1,5 +1,6 @@
 import random
 
+#Default Ability
 class Ability:
     '''Default Ability'''
 
@@ -12,6 +13,7 @@ class Ability:
         rand_hit = random.randint(0, self.attack_strength)
         return rand_hit
 
+#Weapon Ability
 class Weapon(Ability):
     '''Type of Ability'''
 
@@ -19,6 +21,7 @@ class Weapon(Ability):
         return random.randint(self.attack_strength//2, self.attack_strength)
         return rand_attack
 
+#Armor Class
 class Armor:
     '''Block class'''
     def __init__(self,name,max_guard):
@@ -29,6 +32,7 @@ class Armor:
         return random.randint(0, self.max_guard)
 
 
+#Heroes
 class Hero:
     '''All bois begin here'''
     def __init__(self, name, start_hp=100):
@@ -56,6 +60,13 @@ class Hero:
         '''Slap some protection on that bad boi.'''
         self.armors.append(armor)
 
+    def attack(self):
+        '''Calculates the total damage.'''
+        damage = 0
+        for ability in self.abilities:
+            attack = ability.attack()
+            damage += attack
+
     def defend(self):
         '''Blocks damage'''
         block = 0
@@ -66,3 +77,30 @@ class Hero:
     def take_damage(self, damage):
         '''Updates health to show the amount of damage minus block'''
         self.current_hp -= (damage - self.defend())
+
+    def fight(self, foe):
+        '''The battle between the forces of code and coder.'''
+        print('!!! The battle begins between ' + self.name + 'and ' + foe.name + ' !!!')
+        combatant = random.randint(0, 1)
+        while self.is_alive() and foe.is_alive():
+            if combatant == 0:
+                damage = self.attack()
+                foe.take_damage(damage)
+                combatant = 1
+            else:
+                damage = foe.attack()
+                self.take_damage(damage)
+                combatant = 0
+
+        if (self.is_alive()):
+            self.add_kills()
+            foe.add_deaths()
+            print('!!! ' + self.name + ' is victorious!!!')
+        elif (foe.is_alive()):
+            self.add_deaths()
+            foe.add_kills()
+            print('!!! ' + self.name + ' has been defeated!!!')
+
+    def add_deaths(self, death_count=1):
+        '''Updates deaths'''
+        self.deaths += death_count
