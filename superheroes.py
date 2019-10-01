@@ -142,3 +142,25 @@ class Team:
             self.heroes.remove(hero)
         else:
             return 0
+
+    def view_heroes(self):
+        '''Shows heroes'''
+        for hero in self.heroes:
+            print(hero.name)
+
+    def list_conscious(self):
+        '''Returns conscious heroes'''
+        for hero in self.heroes:
+            if hero.is_conscious():
+                conscious.append(hero)
+        return conscious
+
+    def attack(self, opposing_team):
+        '''Pits teams of heroes against each other'''
+        print('!!! Prepare for a Heck in a Seck match between the {} team and the {} squad!!!'.format(self.name, opposing_team.name))
+        while self.any_conscious and opposing_team.any_conscious():
+            random.choice(self.list_conscious()).fight(random.choice(other_team.list_conscious()))
+        if self.any_conscious():
+            print('!!! The {} team is victorious !!!'.format(self.name))
+        else:
+            print('!!! The {} squad has triumphed !!!'.format(opposing_team.name))
