@@ -45,4 +45,24 @@ class Hero:
         return self.current_hp > 0
 
     def add_ability(self, ability):
+        '''Adds the generic ability. Probably Big Punch.'''
         self.abilities.append(Ability)
+
+    def add_weapon(self, weapon):
+        '''Adds the weapon ability'''
+        self.abilities.append(weapon)
+
+    def add_armor(self, armor):
+        '''Slap some protection on that bad boi.'''
+        self.armors.append(armor)
+
+    def defend(self):
+        '''Blocks damage'''
+        block = 0
+        for armor in self.armors:
+            block += armor.block()
+        return block
+
+    def take_damage(self, damage):
+        '''Updates health to show the amount of damage minus block'''
+        self.current_hp -= (damage - self.defend())
