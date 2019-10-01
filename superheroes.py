@@ -108,3 +108,17 @@ class Hero:
     def add_win(self, win_count=1):
         '''Updates wins'''
         self.wins += win_count
+
+    def get_record(self):
+        '''Returns wins and losses'''
+        WLR = 0
+        total_wins = 0
+        total_losses = 0
+        for hero in self.heroes:
+            total_wins += hero.wins
+            total_losses += hero.losses
+        if total_losses == 0:
+            WLR = total_wins
+        else:
+            WLR = total_wins/total_losses
+        return WLR
