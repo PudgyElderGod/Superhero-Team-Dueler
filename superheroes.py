@@ -41,11 +41,11 @@ class Hero:
         self.current_hp = start_hp
         self.abilities = []
         self.armors = []
-        self.deaths = 0
-        self.kills = 0
+        self.losses = 0
+        self.wins = 0
 
-    def is_alive(self):
-        '''Makes sure the boi lives'''
+    def is_conscious(self):
+        '''Makes sure the boi is conscious'''
         return self.current_hp > 0
 
     def add_ability(self, ability):
@@ -92,15 +92,19 @@ class Hero:
                 self.take_damage(damage)
                 combatant = 0
 
-        if (self.is_alive()):
-            self.add_kills()
-            foe.add_deaths()
+        if (self.is_conscious()):
+            self.add_wins()
+            foe.add_losses()
             print('!!! ' + self.name + ' is victorious!!!')
-        elif (foe.is_alive()):
-            self.add_deaths()
-            foe.add_kills()
+        elif (foe.is_conscious()):
+            self.add_losses()
+            foe.add_wins()
             print('!!! ' + self.name + ' has been defeated!!!')
 
-    def add_deaths(self, death_count=1):
-        '''Updates deaths'''
-        self.deaths += death_count
+    def add_losses(self, loss_count=1):
+        '''Updates losses'''
+        self.losses += loss_count
+
+    def add_win(self, win_count=1):
+        '''Updates wins'''
+        self.wins += win_count
