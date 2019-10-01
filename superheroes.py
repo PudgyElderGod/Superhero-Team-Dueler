@@ -227,3 +227,28 @@ class Arena:
         new_Hero.add_weapon(self.create_weapon())
         new_Hero.add_armor(self.create_armor())
         return new_Hero
+
+    def build_team_the_first(self):
+        hero_amount = input('How many heroes do you want? #: ')
+        for i in range(0, int(hero_amount)):
+            self.team_the_first.add_hero(Self.create_hero())
+        pass
+
+    def build_team_the_second(self):
+        hero_amount = input('How many heroes do you want? #: ')
+        for i in range(0, int(her_amount)):
+            self.team_the_second.add_hero(self.create_hero())
+        pass
+
+    def team_battle(self):
+        self.team_the_first.attack(self.team_the_second)
+        self.show_record()
+
+    def show_results(self):
+        print('---RESULTS---')
+        if not self.team_the_first.any_conscious():
+            print(f'{self.team_the_second.name} is victorious!')
+        elif not self.team_the_second.any_conscious():
+            print(f'{self.team_the_first.name} is the winner!')
+        else:
+            print("It's a draw!")
