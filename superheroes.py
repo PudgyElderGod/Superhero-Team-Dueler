@@ -1,24 +1,23 @@
 import random
 
 class Ability:
+    '''Default Ability'''
+
     def __init__(self, name, attack_strength):
-      '''Create Instance Variables:
-          name:String
-          max_damage: Integer
-       '''
-       self.name = name
-       self.attack_strength = attack_strength
+        self.name = name
+        self.attack_strength = attack_strength
 
+    def attack(self):
 
-      def attack(self):
-        ''' Return Damage Values '''
-        return random.randint(0, self.attack_strength)
+        rand_hit = random.randint(0, self.attack_strength)
+        return rand_hit
 
 class Weapon(Ability):
     '''Type of Ability'''
 
     def attack(self):
         return random.randint(self.attack_strength//2, self.attack_strength)
+        return rand_attack
 
 class Armor:
     '''Block class'''
@@ -44,3 +43,6 @@ class Hero:
     def is_alive(self):
         '''Makes sure the boi lives'''
         return self.current_hp > 0
+
+    def add_ability(self, ability):
+        self.abilities.append(Ability)
