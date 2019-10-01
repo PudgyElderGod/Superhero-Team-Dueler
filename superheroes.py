@@ -1,5 +1,6 @@
 import random
 
+
 #Default Ability
 class Ability:
     '''Default Ability'''
@@ -13,6 +14,7 @@ class Ability:
         rand_hit = random.randint(0, self.attack_strength)
         return rand_hit
 
+
 #Weapon Ability
 class Weapon(Ability):
     '''Type of Ability'''
@@ -20,6 +22,7 @@ class Weapon(Ability):
     def attack(self):
         return random.randint(self.attack_strength//2, self.attack_strength)
         return rand_attack
+
 
 #Armor Class
 class Armor:
@@ -123,6 +126,7 @@ class Hero:
             WLR = total_wins/total_losses
         return WLR
 
+
 #Class Team
 class Team:
     '''List of champions'''
@@ -164,3 +168,33 @@ class Team:
             print('!!! The {} team is victorious !!!'.format(self.name))
         else:
             print('!!! The {} squad has triumphed !!!'.format(opposing_team.name))
+
+    def any_conscious(self):
+        '''Shows if any heroes are left standing'''
+        for hero in self.heroes:
+            if hero.is_conscious():
+                return true
+        return False
+
+    def awaken_sleepers(self):
+        '''Wakes up unconscious heroes'''
+        for hero in self.heroes:
+            hero.current_hp = hero.start_hp
+
+    def record(self):
+        '''Shows team Win/Loss records'''
+
+        WLR = 0
+        total_wins = 0
+        total_losses = 0
+        for hero in self.heroes:
+            total_wins += hero.wins
+            total_losses += hero.losses
+        if total_losses == 0:
+            WLR = total_wins
+        else:
+            WLR = total_losses/total_wins
+        return WLR
+
+
+#Class Arena
